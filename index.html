@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Visual Guide to OTC Stocks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: A top-to-bottom narrative infographic designed for scrolling. The flow guides a novice investor from a high-level concept to detailed specifics. It starts with a "What is it?" hook, moves to a direct comparison (OTC vs. Exchange), then dives into the most critical concept: the tiered market structure. This is followed by a balanced view of risks vs. rewards, and concludes with the lifecycle of an OTC stock. This linear story is the most effective way to build foundational knowledge for this topic. -->
+    <!-- Visualization & Content Choices: 
+        - Data Point: ~12,400 OTC securities. Goal: Inform. Viz: Single Big Number. Justification: Creates a high-impact opening to show the scale of the market. Method: Styled HTML.
+        - Data Point: OTC vs. Major Exchanges. Goal: Compare. Viz: Horizontal Bar Chart. Justification: Best for comparing multiple attributes (Regulation, Transparency, etc.) across two categories. Library: Chart.js (Canvas).
+        - Data Point: OTC Tiers (OTCQX, OTCQB, Pink). Goal: Organize/Compare. Viz: Tiered Diagram. Justification: Visually represents the hierarchy of risk and quality, making the concept intuitive. Method: Structured HTML/CSS with Tailwind.
+        - Data Point: Risks vs. Rewards. Goal: Compare. Viz: Donut Chart. Justification: Provides a simple, visual summary of the balanced trade-offs in OTC investing. Library: Chart.js (Canvas).
+        - Data Point: Uplisting/Delisting Lifecycle. Goal: Organize/Show Change. Viz: Flow Chart. Justification: Clearly shows the two potential paths for a company in a simple, easy-to-follow diagram. Method: HTML/CSS with Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #118AB2, #06D6A0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-[#073B4C]">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4">A Visual Guide to <span class="gradient-text">OTC Stocks</span></h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                Discover the world of Over-the-Counter (OTC) stocks, where nearly 12,400 securities trade off the major exchanges. This guide breaks down everything you need to know.
+            </p>
+        </header>
+
+        <section class="my-16">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-10 text-center">
+                <h2 class="text-3xl font-bold mb-2">What Does "Over-the-Counter" Mean?</h2>
+                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Instead of a centralized place like the NYSE, OTC stocks are traded directly between parties through a decentralized dealer network. Think of it as a marketplace without a single, physical trading floor.</p>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">This chart shows how the decentralized nature of OTC markets leads to key differences in regulation, transparency, and liquidity compared to highly structured major exchanges.</p>
+            </div>
+        </section>
+
+        <section class="my-16 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">The Three Tiers of the OTC Market</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10">OTC Markets Group organizes companies into three tiers based on the quality and frequency of their financial reporting. This is the most important concept for understanding risk.</p>
+            
+            <div class="space-y-8">
+                <div class="bg-white rounded-lg shadow-xl p-6 md:p-8 border-t-8 border-[#118AB2]">
+                    <h3 class="text-3xl font-bold text-[#118AB2]">OTCQX® <span class="text-xl font-medium text-gray-500">- The Best Market</span></h3>
+                    <p class="mt-2 text-gray-600">This is the highest tier, for established, investor-focused companies that meet high financial standards and provide regular, audited disclosures. It includes global giants like <strong>Adidas AG</strong> and <strong>Roche Holding Ltd</strong>.</p>
+                    <div class="mt-4 text-left inline-block bg-blue-50 p-4 rounded-md">
+                        <p class="font-semibold">✔ High Transparency</p>
+                        <p class="font-semibold">✔ Audited Financials Required</p>
+                        <p class="font-semibold">✔ No Penny Stocks or Shell Companies</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-xl p-6 md:p-8 border-t-8 border-[#06D6A0]">
+                    <h3 class="text-3xl font-bold text-[#06D6A0]">OTCQB® <span class="text-xl font-medium text-gray-500">- The Venture Market</span></h3>
+                    <p class="mt-2 text-gray-600">For early-stage and developing companies committed to transparency. They must be current in their reporting and undergo annual verification, making it a step up from the Pink market.</p>
+                     <div class="mt-4 text-left inline-block bg-green-50 p-4 rounded-md">
+                        <p class="font-semibold">✔ Moderate Transparency</p>
+                        <p class="font-semibold">✔ Annual Verification</p>
+                        <p class="font-semibold">✔ Minimum $0.01 Bid Price</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-xl p-6 md:p-8 border-t-8 border-[#FF6B6B]">
+                    <h3 class="text-3xl font-bold text-[#FF6B6B]">Pink® <span class="text-xl font-medium text-gray-500">- The Open Market</span></h3>
+                    <p class="mt-2 text-gray-600">The most speculative tier with variable levels of disclosure, from companies that report regularly to those with no information at all. This is where the highest risk lies.</p>
+                    <div class="mt-4 text-left inline-block bg-red-50 p-4 rounded-md">
+                        <p class="font-semibold">✖ Variable to No Transparency</p>
+                        <p class="font-semibold">✖ Audited Financials Not Required</p>
+                        <p class="font-semibold">✖ Highest Potential for Fraud</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">The Risk vs. Reward Trade-Off</h2>
+                 <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">OTC investing is a balancing act. The potential for high returns from emerging companies is weighed against significant risks due to lower transparency and liquidity.</p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-[#FF6B6B]">Potential Risks 👎</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start"><span class="mr-3 text-xl">📉</span><div><strong>Low Liquidity:</strong> Fewer buyers and sellers can make it hard to sell shares at a fair price.</div></li>
+                            <li class="flex items-start"><span class="mr-3 text-xl">🔍</span><div><strong>Limited Information:</strong> Lack of reporting makes it difficult to research a company's health.</div></li>
+                            <li class="flex items-start"><span class="mr-3 text-xl">🚫</span><div><strong>Higher Fraud Potential:</strong> The less-regulated environment can be a target for scams like "pump and dump" schemes.</div></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-[#06D6A0]">Potential Rewards 👍</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start"><span class="mr-3 text-xl">🚀</span><div><strong>High Growth Potential:</strong> Invest in small, emerging companies before they hit the major exchanges.</div></li>
+                            <li class="flex items-start"><span class="mr-3 text-xl">🌍</span><div><strong>Access to Foreign Giants:</strong> Buy shares in major international companies not listed on U.S. exchanges.</div></li>
+                            <li class="flex items-start"><span class="mr-3 text-xl">💰</span><div><strong>Significant Returns:</strong> Low share prices can lead to massive gains if a company succeeds and "uplists."</div></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart-container mt-10 h-64 md:h-80">
+                    <canvas id="rewardRiskChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section class="my-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">The Lifecycle of an OTC Stock</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-10">Companies can move between the OTC market and major exchanges. This journey highlights both the potential for success and the risks of failure.</p>
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-10">
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="text-center p-6 border-2 border-dashed border-[#06D6A0] rounded-lg max-w-sm">
+                        <h3 class="text-2xl font-bold text-[#06D6A0]">Uplisting: The Success Story</h3>
+                        <p class="text-2xl my-4">▲</p>
+                        <p class="text-gray-600">A company grows, meets strict financial and reporting standards, and moves from the OTC market to a major exchange like the NYSE or Nasdaq.</p>
+                        <p class="font-bold mt-2">Example: Advanced Micro Devices (AMD)</p>
+                    </div>
+                    
+                    <div class="text-center p-6 border-2 border-dashed border-[#FF6B6B] rounded-lg max-w-sm">
+                        <h3 class="text-2xl font-bold text-[#FF6B6B]">Delisting: The Cautionary Tale</h3>
+                        <p class="text-2xl my-4">▼</p>
+                        <p class="text-gray-600">A company fails to meet an exchange's minimum requirements (e.g., due to bankruptcy) and is forced to move to the OTC market.</p>
+                        <p class="font-bold mt-2">Example: Bed Bath & Beyond</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center my-12 py-8 border-t">
+            <h3 class="text-2xl font-bold">The Golden Rule: Do Your Own Research</h3>
+            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">The lower regulatory burden on OTC companies means the responsibility falls on you, the investor, to perform thorough due diligence. Always check the market tier, review financials, and be skeptical of hype.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const comparisonChartCtx = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(comparisonChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Regulation & Oversight', 'Listing Requirements', 'Transparency', 'Liquidity'].map(wrapLabel),
+                datasets: [{
+                    label: 'Major Exchanges (e.g., NYSE)',
+                    data: [9, 8, 9, 8],
+                    backgroundColor: '#118AB2',
+                    borderColor: '#073B4C',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }, {
+                    label: 'OTC Markets',
+                    data: [4, 3, 4, 3],
+                    backgroundColor: '#FFD166',
+                    borderColor: '#073B4C',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                         grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'OTC Markets vs. Major Exchanges: A Comparison',
+                        font: { size: 18 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const rewardRiskChartCtx = document.getElementById('rewardRiskChart').getContext('2d');
+        new Chart(rewardRiskChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['High Growth Potential', 'Access to Unique Companies', 'Volatility & Liquidity Risk', 'Information Risk & Fraud'],
+                datasets: [{
+                    data: [25, 25, 30, 20],
+                    backgroundColor: ['#06D6A0', '#118AB2', '#FFD166', '#FF6B6B'],
+                    borderColor: '#f8fafc',
+                    borderWidth: 5,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 20
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Conceptual Balance of OTC Investing',
+                        font: { size: 16 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
